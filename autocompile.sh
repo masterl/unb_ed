@@ -14,11 +14,11 @@ readonly PRINT_LINE="echo \\\"==================================================
 
 readonly entr_command="
 tput reset;
-echo \\\"Compiling...\\\";
+echo \"Compiling...\";
 $PRINT_LINE;
 $COMPILE_COMMAND;
 echo; $PRINT_LINE;
-echo \\\"Running GIT Status...\\\";
+echo \"Running GIT Status...\";
 $PRINT_LINE;
 $GIT_STATUS_COMMAND;
 echo;
