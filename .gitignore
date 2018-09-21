@@ -1,2 +1,4 @@
 program
+objs/
+bin/
 *.o
