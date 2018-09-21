@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-WordNode **get_list_as_array( WordNode *word_list, unsigned *list_size );
+WordList **get_list_as_array( WordList *word_list, unsigned *list_size );
 
-WordNode *create_word_node( char const *const new_word )
+WordList *create_word_node( char const *const new_word )
 {
-    WordNode *new_node = calloc( 1, sizeof( WordNode ) );
+    WordList *new_node = calloc( 1, sizeof( WordList ) );
 
     if( !new_node )
     {
@@ -24,9 +24,9 @@ WordNode *create_word_node( char const *const new_word )
     return new_node;
 }
 
-void destroy_wordlist( WordNode *word_list )
+void destroy_wordlist( WordList *word_list )
 {
-    WordNode *to_remove;
+    WordList *to_remove;
 
     while( word_list != NULL )
     {
@@ -37,9 +37,9 @@ void destroy_wordlist( WordNode *word_list )
     }
 }
 
-void add_word( WordNode **word_list, char const *const new_word )
+void add_word( WordList **word_list, char const *const new_word )
 {
-    WordNode *found_word = find_word( *word_list, new_word );
+    WordList *found_word = find_word( *word_list, new_word );
 
     if( found_word )
     {
@@ -48,7 +48,7 @@ void add_word( WordNode **word_list, char const *const new_word )
         return;
     }
 
-    WordNode *new_word_node = create_word_node( new_word );
+    WordList *new_word_node = create_word_node( new_word );
 
     if( !new_word_node )
     {
@@ -62,7 +62,7 @@ void add_word( WordNode **word_list, char const *const new_word )
         return;
     }
 
-    WordNode *last_node;
+    WordList *last_node;
 
     for( last_node = *word_list; last_node->next != NULL; last_node = last_node->next )
         ;
@@ -70,7 +70,7 @@ void add_word( WordNode **word_list, char const *const new_word )
     last_node->next = new_word_node;
 }
 
-WordNode *find_word( WordNode *word_list, char const *const word )
+WordList *find_word( WordList *word_list, char const *const word )
 {
     for( ; word_list != NULL; word_list = word_list->next )
     {
@@ -83,7 +83,7 @@ WordNode *find_word( WordNode *word_list, char const *const word )
     return word_list;
 }
 
-void sort_wordlist( WordNode **word_list )
+void sort_wordlist( WordList **word_list )
 {
     if( !( *word_list ) )
     {
@@ -91,7 +91,7 @@ void sort_wordlist( WordNode **word_list )
     }
 
     unsigned list_size;
-    WordNode **nodes = get_list_as_array( *word_list, &list_size );
+    WordList **nodes = get_list_as_array( *word_list, &list_size );
 
     bool changed = true;
     unsigned last = list_size;
@@ -104,7 +104,7 @@ void sort_wordlist( WordNode **word_list )
         {
             if( strcmp( nodes[i]->word, nodes[i + 1]->word ) > 0 )
             {
-                WordNode *tmp = nodes[i];
+                WordList *tmp = nodes[i];
                 nodes[i] = nodes[i + 1];
                 nodes[i + 1] = tmp;
 
@@ -124,13 +124,13 @@ void sort_wordlist( WordNode **word_list )
     free( nodes );
 }
 
-WordNode **get_list_as_array( WordNode *word_list, unsigned *list_size )
+WordList **get_list_as_array( WordList *word_list, unsigned *list_size )
 {
-    WordNode **nodes;
+    WordList **nodes;
 
     *list_size = get_list_size( word_list );
 
-    nodes = malloc( sizeof( WordNode * ) * ( *list_size ) );
+    nodes = malloc( sizeof( WordList * ) * ( *list_size ) );
 
     for( unsigned i = 0; i < *list_size; ++i )
     {
@@ -141,7 +141,7 @@ WordNode **get_list_as_array( WordNode *word_list, unsigned *list_size )
     return nodes;
 }
 
-unsigned get_list_size( WordNode *word_list )
+unsigned get_list_size( WordList *word_list )
 {
     unsigned size = 0;
 

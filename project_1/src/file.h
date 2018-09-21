@@ -3,6 +3,6 @@
 
 #include "WordList.h"
 
-void get_words_from_file( WordNode **word_list, char const *const filename );
+void get_words_from_file( WordList **word_list, char const *const filename );
 
 #endif

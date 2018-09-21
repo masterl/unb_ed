@@ -16,8 +16,8 @@ int main( int argc, char **argv )
         return EXIT_FAILURE;
     }
 
-    WordNode *first_file_words = NULL;
-    WordNode *second_file_words = NULL;
+    WordList *first_file_words = NULL;
+    WordList *second_file_words = NULL;
 
     printf( "Reading [%s]...\n", argv[1] );
     get_words_from_file( &first_file_words, argv[1] );

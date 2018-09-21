@@ -6,15 +6,15 @@ typedef struct _word_node
     char word[32];
     unsigned count;
     struct _word_node *next;
-} WordNode;
+} WordList;
 
-WordNode *create_word_node( char const *const new_word );
-void destroy_wordlist( WordNode *word_list );
+WordList *create_word_node( char const *const new_word );
+void destroy_wordlist( WordList *word_list );
 
-void add_word( WordNode **word_list, char const *const new_word );
-WordNode *find_word( WordNode *word_list, char const *const word );
+void add_word( WordList **word_list, char const *const new_word );
+WordList *find_word( WordList *word_list, char const *const word );
 
-void sort_wordlist( WordNode **word_list );
-unsigned get_list_size( WordNode *word_list );
+void sort_wordlist( WordList **word_list );
+unsigned get_list_size( WordList *word_list );
 
 #endif

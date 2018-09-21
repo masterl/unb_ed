@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 
-long dot_product( WordNode *first_file_words, WordNode *second_file_words );
-double word_list_magnitude( WordNode *word_list );
+long dot_product( WordList *first_file_words, WordList *second_file_words );
+double word_list_magnitude( WordList *word_list );
 
-long dot_product( WordNode *first_file_words, WordNode *second_file_words )
+long dot_product( WordList *first_file_words, WordList *second_file_words )
 {
     long product = 0;
 
@@ -35,7 +35,7 @@ long dot_product( WordNode *first_file_words, WordNode *second_file_words )
     return product;
 }
 
-double word_list_magnitude( WordNode *word_list )
+double word_list_magnitude( WordList *word_list )
 {
     long sum = 0;
 
@@ -47,7 +47,7 @@ double word_list_magnitude( WordNode *word_list )
     return sqrt( sum );
 }
 
-double calculate_similarity( WordNode *first_file_words, WordNode *second_file_words )
+double calculate_similarity( WordList *first_file_words, WordList *second_file_words )
 {
     long const product = dot_product( first_file_words, second_file_words );
     double const first_magnitude = word_list_magnitude( first_file_words );

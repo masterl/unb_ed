@@ -3,6 +3,6 @@
 
 #include "WordList.h"
 
-double calculate_similarity( WordNode *first_file_words, WordNode *second_file_words );
+double calculate_similarity( WordList *first_file_words, WordList *second_file_words );
 
 #endif
