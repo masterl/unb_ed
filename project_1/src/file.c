@@ -18,6 +18,7 @@ void get_words_from_file( WordNode **word_list, char const *const filename )
 
     if( !file )
     {
+        fprintf( stderr, "\nCouldn't open file [%s]\n", filename );
         return;
     }
 

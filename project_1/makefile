@@ -45,7 +45,7 @@ ifeq ($(MAKECMDGOALS),test)
 	TESTFLAGS :=
 endif
 
-LINKFLAGS += $(TESTFLAGS)
+LINKFLAGS := -lm $(TESTFLAGS)
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #	Sources directories

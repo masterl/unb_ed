@@ -85,6 +85,11 @@ WordNode *find_word( WordNode *word_list, char const *const word )
 
 void sort_wordlist( WordNode **word_list )
 {
+    if( !( *word_list ) )
+    {
+        return;
+    }
+
     unsigned list_size;
     WordNode **nodes = get_list_as_array( *word_list, &list_size );
 

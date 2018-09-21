@@ -4,25 +4,40 @@
 
 #include "WordList.h"
 #include "file.h"
+#include "similarity.h"
 
-int main( void )
+int main( int argc, char **argv )
 {
-    WordNode *word_list = NULL;
-
-    get_words_from_file( &word_list, "sonets-shakespeare.txt" );
-
-    sort_wordlist( &word_list );
-
-    WordNode *reader;
-    for( reader = word_list; reader != NULL; reader = reader->next )
+    if( argc != 3 )
     {
-        if( reader->count > 2 )
-        {
-            printf( "%15s %4d\n", reader->word, reader->count );
-        }
+        printf( "ERROR! You should provide two files.\n" );
+        printf( "Usage:\n\t%s <file_1> <file_2>\n", argv[0] );
+
+        return EXIT_FAILURE;
     }
 
-    destroy_wordlist( word_list );
+    WordNode *first_file_words = NULL;
+    WordNode *second_file_words = NULL;
+
+    printf( "Reading [%s]...\n", argv[1] );
+    get_words_from_file( &first_file_words, argv[1] );
+    printf( "Reading [%s]...\n", argv[2] );
+    get_words_from_file( &second_file_words, argv[2] );
+
+    printf( "Sorting words...\n" );
+    sort_wordlist( &first_file_words );
+    sort_wordlist( &second_file_words );
+
+    printf( "Calculating similarity...\n" );
+    double const similarity = calculate_similarity( first_file_words, second_file_words );
+
+    printf( "\nSimilarity between\n" );
+    printf( "   %s\n", argv[1] );
+    printf( "   %s\n", argv[2] );
+    printf( "---------> %.2lf%%\n", similarity );
+
+    destroy_wordlist( first_file_words );
+    destroy_wordlist( second_file_words );
 
     return 0;
 }
