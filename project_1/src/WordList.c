@@ -1,7 +1,10 @@
 #include "WordList.h"
 
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+
+WordNode **get_list_as_array( WordNode *word_list, unsigned *list_size );
 
 WordNode *create_word_node( char const *const new_word )
 {
@@ -78,4 +81,69 @@ WordNode *find_word( WordNode *word_list, char const *const word )
     }
 
     return word_list;
+}
+
+void sort_wordlist( WordNode **word_list )
+{
+    unsigned list_size;
+    WordNode **nodes = get_list_as_array( *word_list, &list_size );
+
+    bool changed = true;
+    unsigned last = list_size;
+
+    while( changed )
+    {
+        changed = false;
+
+        for( unsigned i = 0; i < last - 1; ++i )
+        {
+            if( strcmp( nodes[i]->word, nodes[i + 1]->word ) > 0 )
+            {
+                WordNode *tmp = nodes[i];
+                nodes[i] = nodes[i + 1];
+                nodes[i + 1] = tmp;
+
+                changed = true;
+            }
+        }
+    }
+
+    for( unsigned i = 0; i < list_size - 1; ++i )
+    {
+        nodes[i]->next = nodes[i + 1];
+    }
+    nodes[list_size - 1]->next = NULL;
+
+    *word_list = nodes[0];
+
+    free( nodes );
+}
+
+WordNode **get_list_as_array( WordNode *word_list, unsigned *list_size )
+{
+    WordNode **nodes;
+
+    *list_size = get_list_size( word_list );
+
+    nodes = malloc( sizeof( WordNode * ) * ( *list_size ) );
+
+    for( unsigned i = 0; i < *list_size; ++i )
+    {
+        nodes[i] = word_list;
+        word_list = word_list->next;
+    }
+
+    return nodes;
+}
+
+unsigned get_list_size( WordNode *word_list )
+{
+    unsigned size = 0;
+
+    for( ; word_list != NULL; word_list = word_list->next )
+    {
+        ++size;
+    }
+
+    return size;
 }

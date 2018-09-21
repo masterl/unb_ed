@@ -11,6 +11,8 @@ int main( void )
 
     get_words_from_file( &word_list, "sonets-shakespeare.txt" );
 
+    sort_wordlist( &word_list );
+
     WordNode *reader;
     for( reader = word_list; reader != NULL; reader = reader->next )
     {

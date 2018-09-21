@@ -14,4 +14,7 @@ void destroy_wordlist( WordNode *word_list );
 void add_word( WordNode **word_list, char const *const new_word );
 WordNode *find_word( WordNode *word_list, char const *const word );
 
+void sort_wordlist( WordNode **word_list );
+unsigned get_list_size( WordNode *word_list );
+
 #endif
